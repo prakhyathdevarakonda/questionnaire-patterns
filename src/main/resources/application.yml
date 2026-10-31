@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: questionnaire-patterns
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/questionnaire_patterns}

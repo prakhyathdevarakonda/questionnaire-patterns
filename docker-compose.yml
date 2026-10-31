@@ -1,0 +1,13 @@
+# Local MongoDB for the app: `docker compose up -d`, then `mvn spring-boot:run`.
+# Data survives restarts in the named volume; `docker compose down -v` wipes it.
+services:
+  mongo:
+    image: mongo:7
+    container_name: questionnaire-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
