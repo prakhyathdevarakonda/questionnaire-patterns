@@ -1,4 +1,5 @@
-# Local MongoDB for the app: `docker compose up -d`, then `mvn spring-boot:run`.
+# Default:  docker compose up -d                  -> MongoDB on localhost:27017
+# Web UI:   docker compose --profile tools up -d  -> mongo-express on http://localhost:8091
 # Data survives restarts in the named volume; `docker compose down -v` wipes it.
 services:
   mongo:
@@ -8,6 +9,17 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+
+  mongo-express:
+    profiles: ["tools"]
+    image: mongo-express:1.0.2
+    container_name: questionnaire-mongo-express
+    depends_on: [mongo]
+    ports:
+      - "8091:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/
+      ME_CONFIG_BASICAUTH: "false"
 
 volumes:
   mongo-data:

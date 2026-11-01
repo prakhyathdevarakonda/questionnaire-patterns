@@ -1,3 +1,6 @@
+server:
+  port: 8083   # 8080 is taken by wallet-service when both run
+
 spring:
   application:
     name: questionnaire-patterns
