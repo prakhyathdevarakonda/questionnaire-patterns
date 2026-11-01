@@ -4,7 +4,7 @@ Lab for study map **Week 2** (Spring core, Design patterns), plus immutability (
 
 ## Run locally
 
-One-time install: Docker Desktop, Maven, Java 17+ (`brew install --cask docker`, `brew install maven openjdk@21`).
+One-time install: Docker + jq; Java 17+ and Maven are optional (per-OS table: `backend-mastery/projects/README.md` → "One-time install").
 
 ```bash
 docker compose up -d                   # MongoDB 7 on localhost:27017 (-d = runs in the background)
@@ -20,6 +20,7 @@ Stop: `docker compose --profile tools down` (keeps data) · add `-v` to wipe it.
 
 ```bash
 docker run -d --name questionnaire-app -p 8083:8083 \
+  --add-host=host.docker.internal:host-gateway \
   -e MONGODB_URI=mongodb://host.docker.internal:27017/questionnaire_patterns \
   -v "$PWD":/app -v questionnaire-m2:/root/.m2 -w /app \
   maven:3.9.9-eclipse-temurin-21 mvn -q spring-boot:run

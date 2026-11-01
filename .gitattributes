@@ -1,0 +1,2 @@
+# Keep shell scripts runnable on Linux/WSL even when cloned on Windows
+*.sh text eol=lf
